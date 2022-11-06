@@ -3,5 +3,5 @@
 import '../model/pedido.dart';
 
 abstract class IPedidoRepository {
-  Future<List<Pedido>> findAllPedido();
+  Future<Pedido> fetchPedido();
 }
