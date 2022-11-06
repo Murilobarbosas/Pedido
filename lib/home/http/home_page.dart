@@ -10,18 +10,21 @@ class HomePage extends GetView<PedidoController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Http'),
+        title: const Text('Pedido'),
       ),
       body: controller.obx((state) {
-        return ListView.builder(
-          itemCount: state.length,
-          itemBuilder: (_, index) {
-            final Pedido item = state[index];
-            return ListTile(
-              title: Text(item.nomeProduto),
-              subtitle: Text(item.descricao),
-            );
-          },
+        return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: ListView.builder(
+            itemCount: state.length,
+            itemBuilder: (_, index) {
+              final Pedido item = state[index];
+              return ListTile(
+                title: Text(item.nomeProduto),
+                subtitle: Text(item.descricao),
+              );
+            },
+          ),
         );
       }, onError: (error) {
         return SizedBox(

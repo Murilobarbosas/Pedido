@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
+import 'package:lista_produtos/home/http/repository/Pedido_http_repository.dart';
 
 class Adicionar extends StatefulWidget {
   const Adicionar({Key? key}) : super(key: key);
@@ -11,42 +10,56 @@ class Adicionar extends StatefulWidget {
 }
 
 class _AdicionarState extends State<Adicionar> {
+  TextEditingController nome = TextEditingController();
+  TextEditingController valor = TextEditingController();
+  TextEditingController descricao = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Pedido"),
-      ),
-      body: Center(
-          child: Column(children: <Widget>[
-        const Padding(
-            padding: EdgeInsets.all(10.0),
-            child: TextField(
-                decoration: InputDecoration(
-              border: UnderlineInputBorder(),
-              labelText: 'Nome',
-            ))),
-        const Padding(
-            padding: EdgeInsets.all(10.0),
-            child: TextField(
-                decoration: InputDecoration(
-              border: UnderlineInputBorder(),
-              labelText: 'Valor',
-            ))),
-        const Padding(
-            padding: EdgeInsets.all(10.0),
-            child: TextField(
-                decoration: InputDecoration(
-              border: UnderlineInputBorder(),
-              labelText: 'Descricao',
-            ))),
-        const SizedBox(height: 10),
-        ElevatedButton(
-          onPressed: () {},
-          child: const Text('Cadastrar Novo Produto',
-              style: TextStyle(fontSize: 20)),
-        )
-      ])),
-    );
+        appBar: AppBar(
+          title: const Text("Pedido"),
+        ),
+        body: Form(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextFormField(
+                    controller: nome,
+                    decoration: const InputDecoration(
+                      icon: Icon(Icons.text_snippet_rounded),
+                      hintText: "Insira o Pedido",
+                      labelText: 'Nome',
+                    )),
+                TextFormField(
+                    controller: valor,
+                    decoration: const InputDecoration(
+                      icon: Icon(Icons.attach_money),
+                      hintText: "Valor do Pedido",
+                      labelText: 'Valor',
+                    )),
+                TextFormField(
+                    controller: descricao,
+                    decoration: const InputDecoration(
+                      icon: Icon(Icons.format_list_bulleted),
+                      hintText: "Descreva o Pedido",
+                      labelText: 'Descreva',
+                    )),
+                ElevatedButton(
+                    onPressed: (() {
+                      String name = nome.text;
+                      double price = double.parse(valor.text);
+                      String texto = descricao.text;
+                      PedidoHttpRepository phr = PedidoHttpRepository();
+                      phr.save(name, price, texto);
+                      Get.back();
+                    }),
+                    child: const Text("Cadastro de Pedido"))
+              ],
+            ),
+          ),
+        ));
   }
 }

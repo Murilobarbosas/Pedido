@@ -5,10 +5,12 @@ import 'package:lista_produtos/home/http/home_page.dart';
 import 'package:lista_produtos/home/http/pedidoBindings.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -17,15 +19,15 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(
           name: '/',
-          page: () => HomePage(),
+          page: () => const HomePage(),
           binding: PedidoBindings(),
           children: [
             GetPage(
               name: '/home',
-              page: () => HomePage(),
+              page: () => const HomePage(),
               binding: PedidoBindings(),
             ),
-            GetPage(name: '/adicionar', page: () => Adicionar())
+            GetPage(name: '/adicionar', page: () => const Adicionar())
           ],
         )
       ],
