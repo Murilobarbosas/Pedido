@@ -1,36 +1,49 @@
-import 'package:lista_produtos/home/repository/Pedido_http_repository.dart';
+import 'package:get/get.dart';
+import 'package:lista_produtos/home/http/pedidoController.dart';
 import 'package:lista_produtos/model/pedido.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  late Future<Pedido> futurePedido;
-
-  @override
-  void initState() {
-    super.initState();
-    PedidoHttpRepository p = PedidoHttpRepository();
-    futurePedido = p.fetchPedido();
-  }
+class HomePage extends GetView<PedidoController> {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Pedido>(
-      future: futurePedido,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return Text(snapshot.data!.nomeProduto);
-        } else if (snapshot.hasError) {
-          return Text("${snapshot.error}");
-        }
-        return const CircularProgressIndicator();
-      },
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Http'),
+      ),
+      body: controller.obx((state) {
+        return ListView.builder(
+          itemCount: state.length,
+          itemBuilder: (_, index) {
+            final Pedido item = state[index];
+            return ListTile(
+              title: Text(item.nomeProduto),
+              subtitle: Text(item.descricao),
+            );
+          },
+        );
+      }, onError: (error) {
+        return SizedBox(
+          width: double.infinity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(error.toString()),
+              TextButton(
+                onPressed: () => controller.findAll(),
+                child: const Text('Tentar novamente'),
+              )
+            ],
+          ),
+        );
+      }),
+      floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.add_circle),
+          backgroundColor: Colors.blueAccent,
+          onPressed: (() {
+            Get.toNamed('/adicionar');
+          })),
     );
   }
 }

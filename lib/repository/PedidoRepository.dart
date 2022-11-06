@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 
-import '../model/pedido.dart';
+import 'package:lista_produtos/model/pedido.dart';
 
 abstract class IPedidoRepository {
-  Future<Pedido> fetchPedido();
+  Future<List<Pedido>> findAll();
 }
