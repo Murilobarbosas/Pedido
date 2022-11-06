@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:lista_produtos/repository/PedidoRepository.dart';
 import 'package:get/get.dart';
 

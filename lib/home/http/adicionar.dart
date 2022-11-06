@@ -10,8 +10,8 @@ class Adicionar extends StatefulWidget {
 }
 
 class _AdicionarState extends State<Adicionar> {
-  TextEditingController nome = TextEditingController();
-  TextEditingController valor = TextEditingController();
+  TextEditingController nome_pedido = TextEditingController();
+  TextEditingController valor_pedido = TextEditingController();
   TextEditingController descricao = TextEditingController();
 
   @override
@@ -24,17 +24,17 @@ class _AdicionarState extends State<Adicionar> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 TextFormField(
-                    controller: nome,
+                    controller: nome_pedido,
                     decoration: const InputDecoration(
                       icon: Icon(Icons.text_snippet_rounded),
                       hintText: "Insira o Pedido",
                       labelText: 'Nome',
                     )),
                 TextFormField(
-                    controller: valor,
+                    controller: valor_pedido,
                     decoration: const InputDecoration(
                       icon: Icon(Icons.attach_money),
                       hintText: "Valor do Pedido",
@@ -49,11 +49,11 @@ class _AdicionarState extends State<Adicionar> {
                     )),
                 ElevatedButton(
                     onPressed: (() {
-                      String name = nome.text;
-                      double price = double.parse(valor.text);
+                      String name = nome_pedido.text;
+                      String price = valor_pedido.text;
                       String texto = descricao.text;
                       PedidoHttpRepository phr = PedidoHttpRepository();
-                      phr.save(name, price, texto);
+                      phr.save(texto, name, price);
                       Get.back();
                     }),
                     child: const Text("Cadastro de Pedido"))

@@ -21,15 +21,16 @@ class PedidoHttpRepository implements IPedidoRepository {
   }
 
   @override
-  Future<Pedido> save(String nome, double valor, String descricao) async {
+  Future<Pedido> save(
+      String descricao, String nome_produto, String valor_produto) async {
     try {
       var uri = Uri.parse('http://localhost:8080/android');
       final response = await http.post(uri,
           headers: <String, String>{"Content-Type": "application/json"},
           body: jsonEncode(<String, String>{
-            "nome_produto": nome,
-            "valor_produto": valor.toString(),
-            "descricao": descricao
+            "descricao": descricao,
+            "nome_produto": nome_produto,
+            "valor_produto": valor_produto
           }));
       String responseString = response.body;
       Pedido p = responseString as Pedido;

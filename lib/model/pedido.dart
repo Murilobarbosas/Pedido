@@ -4,45 +4,46 @@ import 'dart:convert';
 
 class Pedido {
   int id;
-  String nomeProduto;
-  double valorProduto;
   String descricao;
+  String nome_pedido;
+  String valor_pedido;
+  
   Pedido({
     required this.id,
-    required this.nomeProduto,
-    required this.valorProduto,
     required this.descricao,
+    required this.nome_pedido,
+    required this.valor_pedido,
   });
 
   Pedido copyWith({
     int? id,
-    String? nomeProduto,
-    double? valorProduto,
     String? descricao,
+    String? nome_pedido,
+    String? valor_pedido,
   }) {
     return Pedido(
       id: id ?? this.id,
-      nomeProduto: nomeProduto ?? this.nomeProduto,
-      valorProduto: valorProduto ?? this.valorProduto,
       descricao: descricao ?? this.descricao,
+      nome_pedido: nome_pedido ?? this.nome_pedido,
+      valor_pedido: valor_pedido ?? this.valor_pedido,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'nomeProduto': nomeProduto,
-      'valorProduto': valorProduto,
       'descricao': descricao,
+      'nome_pedido': nome_pedido,
+      'valor_pedido': valor_pedido,
     };
   }
 
   factory Pedido.fromMap(Map<String, dynamic> map) {
     return Pedido(
       id: map['id'] as int,
-      nomeProduto: map['nomeProduto'] as String,
-      valorProduto: map['valorProduto'] as double,
       descricao: map['descricao'] as String,
+      nome_pedido: map['nome_pedido'] as String,
+      valor_pedido: map['valor_pedido'] as String,
     );
   }
 
@@ -53,7 +54,7 @@ class Pedido {
 
   @override
   String toString() {
-    return 'Pedido(id: $id, nomeProduto: $nomeProduto, valorProduto: $valorProduto, descricao: $descricao)';
+    return 'Pedido(id: $id, descricao: $descricao, nome_pedido: $nome_pedido, valor_pedido: $valor_pedido)';
   }
 
   @override
@@ -61,16 +62,16 @@ class Pedido {
     if (identical(this, other)) return true;
 
     return other.id == id &&
-        other.nomeProduto == nomeProduto &&
-        other.valorProduto == valorProduto &&
-        other.descricao == descricao;
+        other.descricao == descricao &&
+        other.nome_pedido == nome_pedido &&
+        other.valor_pedido == valor_pedido;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-        nomeProduto.hashCode ^
-        valorProduto.hashCode ^
-        descricao.hashCode;
+        descricao.hashCode ^
+        nome_pedido.hashCode ^
+        valor_pedido.hashCode;
   }
 }

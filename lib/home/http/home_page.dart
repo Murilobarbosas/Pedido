@@ -20,7 +20,7 @@ class HomePage extends GetView<PedidoController> {
             itemBuilder: (_, index) {
               final Pedido item = state[index];
               return ListTile(
-                title: Text(item.nomeProduto),
+                title: Text(item.nome_pedido + "  -  " + item.valor_pedido),
                 subtitle: Text(item.descricao),
               );
             },
