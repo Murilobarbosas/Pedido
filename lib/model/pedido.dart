@@ -3,11 +3,13 @@ import 'dart:convert';
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 class Pedido {
-  int id;
+  int? id;
   String descricao;
   String nome_pedido;
   String valor_pedido;
-  
+
+  Pedido.add(this.descricao, this.nome_pedido, this.valor_pedido, [this.id]);
+
   Pedido({
     required this.id,
     required this.descricao,
