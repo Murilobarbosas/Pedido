@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, non_constant_identifier_names
+
 import 'dart:convert';
 
 import 'package:lista_produtos/model/pedido.dart';
@@ -13,7 +15,6 @@ class Service implements IPedidoRepository {
       final List<dynamic> data = jsonDecode(response.body);
       return data.map<Pedido>((resp) => Pedido.fromMap(resp)).toList();
     } catch (e) {
-      print(e);
       rethrow;
     }
   }
@@ -30,7 +31,6 @@ class Service implements IPedidoRepository {
       });
       return response.body;
     } catch (e) {
-      print(e);
       rethrow;
     }
   }
